@@ -1,0 +1,6 @@
+# This file ensures the data directory is created and tracked by git
+# The data directory is used to store:
+# - Cached market data
+# - Historical trading data
+# - Performance reports
+# - Session data
