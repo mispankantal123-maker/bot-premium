@@ -51,6 +51,36 @@ class StrategyManager:
             print(f"Failed to load strategy {strategy_name}: {str(e)}")
             return False
     
+    def start_strategy(self, strategy_name: str = None) -> bool:
+        """Start trading with specified strategy"""
+        try:
+            if strategy_name:
+                if not self.load_strategy(strategy_name):
+                    return False
+            
+            if self.current_strategy:
+                # Start the strategy if it has a start method
+                if hasattr(self.current_strategy, 'start'):
+                    return self.current_strategy.start()
+                else:
+                    print(f"Strategy loaded: {self.get_current_strategy_name()}")
+                    return True
+            
+            return False
+        except Exception as e:
+            print(f"Failed to start strategy: {e}")
+            return False
+    
+    def stop_strategy(self) -> bool:
+        """Stop current strategy"""
+        try:
+            if self.current_strategy and hasattr(self.current_strategy, 'stop'):
+                return self.current_strategy.stop()
+            return True
+        except Exception as e:
+            print(f"Failed to stop strategy: {e}")
+            return False
+    
     def get_available_strategies(self) -> list:
         """Get list of available strategy names"""
         return list(AVAILABLE_STRATEGIES.keys())

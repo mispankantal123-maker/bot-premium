@@ -18,6 +18,18 @@ author = "agent"
 task = "workflow.run"
 args = "TradeMaestro Bot"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "TradeMaestro Windows"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Simple Test"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "TradeMaestro Final"
+
 [[workflows.workflow]]
 name = "TradeMaestro Bot"
 author = "agent"
@@ -28,3 +40,36 @@ outputType = "console"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "python main_cli.py demo"
+
+[[workflows.workflow]]
+name = "TradeMaestro Windows"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python main_windows.py"
+
+[workflows.workflow.metadata]
+outputType = "console"
+
+[[workflows.workflow]]
+name = "Simple Test"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python main_simple.py"
+
+[workflows.workflow.metadata]
+outputType = "console"
+
+[[workflows.workflow]]
+name = "TradeMaestro Final"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python trademaestro_final.py"
+
+[workflows.workflow.metadata]
+outputType = "console"

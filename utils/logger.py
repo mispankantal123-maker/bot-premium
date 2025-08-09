@@ -57,7 +57,12 @@ class TradeMaestroLogger:
     def __init__(self, name: str, level: str = "INFO", log_file: Optional[Path] = None):
         self.name = name
         self.logger = logging.getLogger(name)
-        self.logger.setLevel(getattr(logging, level.upper()))
+        
+        # Ensure level is string
+        if hasattr(level, 'upper'):
+            self.logger.setLevel(getattr(logging, level.upper()))
+        else:
+            self.logger.setLevel(getattr(logging, str(level).upper()))
         
         # Prevent duplicate handlers
         if self.logger.handlers:

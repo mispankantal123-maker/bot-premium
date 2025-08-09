@@ -1,0 +1,21 @@
+{
+    "lot_size": 0.01,
+    "max_positions": 5,
+    "symbols": [
+        "EURUSD",
+        "GBPUSD",
+        "USDJPY"
+    ],
+    "timeframe": "M15",
+    "demo_mode": true,
+    "max_risk_per_trade": 0.02,
+    "max_daily_loss": 0.05,
+    "stop_loss_pips": 50,
+    "take_profit_pips": 100,
+    "auto_start": false,
+    "refresh_rate": 2,
+    "log_level": "INFO",
+    "data_dir": "data",
+    "logs_dir": "logs",
+    "cache_dir": "cache"
+}
