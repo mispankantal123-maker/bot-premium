@@ -1,0 +1,99 @@
+Audit & Rebuild TradeMaestro (Windows Version)
+
+Kamu adalah asisten coding ahli Python, GUI, dan MetaTrader5 yang bertugas untuk mendesain ulang dan membangun ulang bot trading TradeMaestro dari nol agar sepenuhnya kompatibel di Windows, tanpa freeze, tanpa crash, dengan struktur bersih dan modular.
+Bot harus menggunakan logika strategi, parameter, dan fitur yang ada di bobot2.py sebagai referensi, tapi seluruh kode harus ditulis ulang supaya stabil dan mudah di-maintain.
+
+🎯 Tujuan
+Membangun ulang bot dari awal dengan arsitektur cross-platform, fokus pada kompatibilitas Windows.
+
+Memastikan bot tidak freeze saat trading maupun saat idle.
+
+Menjamin semua proses berat (trading, analisis, load data) berjalan di background thread agar GUI selalu responsif.
+
+Mengimplementasikan struktur kode modular supaya strategi, GUI, dan koneksi ke MT5 terpisah rapi.
+
+Menambahkan logging real-time yang jelas, aman, dan berwarna di Windows.
+
+🛠 Persyaratan Teknis
+Bahasa & Versi
+
+Python 3.10+
+
+Gunakan library resmi MetaTrader5 (MetaTrader5 Python API)
+
+Semua path harus pakai pathlib untuk kompatibilitas Windows
+
+Struktur Folder (Wajib)
+
+bash
+Copy
+Edit
+TradeMaestro/
+├── main.py               # Entry point bot
+├── config.py             # Konfigurasi default
+├── logger.py             # Logging cross-platform
+├── trading/
+│   ├── mt5_connector.py  # Koneksi ke MT5
+│   ├── strategies.py     # Semua strategi (ambil dari bobot2.py)
+│   ├── risk_manager.py   # Manajemen risiko
+│   └── trade_executor.py # Eksekusi order
+├── gui/
+│   ├── main_gui.py       # GUI utama
+│   ├── settings_tab.py   # Tab pengaturan strategi
+│   └── log_tab.py        # Tab log real-time
+├── utils/
+│   ├── os_utils.py       # Deteksi OS & path
+│   ├── threading_utils.py# Thread-safe GUI update
+│   └── file_utils.py     # Helper file
+└── requirements.txt
+Fitur Wajib
+
+Tab pengaturan strategi (Lot, TP, SL, pilihan strategi, dll.)
+
+Tab log yang update real-time
+
+Tombol Start Trading & Stop Trading
+
+Semua strategi dari bobot2.py dimigrasikan
+
+Sistem risk management
+
+Logging lengkap (event, error, eksekusi order)
+
+Semua kode mendukung Windows penuh (tidak ada kode khusus Linux)
+
+Semua operasi berat dipindahkan ke thread atau async task
+
+Prinsip Pengembangan
+
+No freeze → GUI tidak pernah hang walaupun MT5 lag
+
+Thread-safe → Gunakan mekanisme aman untuk update GUI dari thread
+
+Error handling kuat → Setiap operasi MT5 dibungkus try/except
+
+Cross-platform → Hindari fungsi OS yang spesifik Linux
+
+Modular → Pisahkan fungsi sesuai tanggung jawab file
+
+Testing
+
+Jalankan di Windows 10/11, pastikan tidak ada error path
+
+Uji semua strategi berjalan dengan baik
+
+Uji start/stop trading berulang kali tanpa crash
+
+Uji koneksi MT5 stabil
+
+💡 Instruksi untuk Replit
+
+Baca dan pahami semua fitur dan logika strategi dari bobot2.py.
+
+Bangun ulang dari nol menggunakan struktur di atas.
+
+Pastikan seluruh sistem berjalan di Windows tanpa freeze/crash.
+
+Sertakan komentar detail di setiap file.
+
+Lakukan optimasi performa dan memori sesuai kebutuhan.

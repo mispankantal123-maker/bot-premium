@@ -1,0 +1,93 @@
+1. Spesifikasi Struktur Folder & File
+Struktur direktori yang disarankan (Windows-friendly)
+
+bash
+Copy
+Edit
+TradeMaestro/
+│
+├── main.py                # Entry point bot (GUI + inisialisasi sistem)
+├── config.py              # Konfigurasi umum (MT5, akun, default strategi)
+├── requirements.txt       # Daftar dependensi
+├── .env                   # Rahasia & kredensial (login MT5)
+│
+├── strategies/            # Folder strategi trading
+│   ├── __init__.py
+│   ├── scalping.py        # Contoh strategi scalping
+│   ├── swing.py           # Contoh strategi swing trading
+│   └── ... strategi lain
+│
+├── utils/                 # Fungsi pendukung
+│   ├── __init__.py
+│   ├── logger.py          # Logging & error handling
+│   ├── mt5_connector.py   # Koneksi ke MetaTrader 5
+│   ├── data_fetcher.py    # Ambil data market
+│   ├── order_manager.py   # Eksekusi order buy/sell
+│   └── performance.py     # Tracking performa bot
+│
+├── gui/                   # Folder GUI
+│   ├── __init__.py
+│   ├── main_window.py     # Tampilan utama
+│   ├── settings_panel.py  # Panel pengaturan
+│   └── strategy_panel.py  # Panel strategi
+│
+├── logs/                  # Folder untuk file log
+│   ├── bot.log
+│
+└── data/                  # Data hasil download / backtest
+    ├── history/
+    └── cache/
+Catatan kompatibilitas Windows:
+
+Gunakan os.path.join() atau pathlib untuk semua path, jangan hardcode / atau \.
+
+Pastikan nama file & folder case-insensitive aman (Windows tidak membedakan Data.csv vs data.csv).
+
+Hindari path yang terlalu panjang (Windows default max 260 karakter).
+
+2. Flow Kerja Bot (High-Level)
+Langkah Eksekusi
+Start Bot
+
+main.py dijalankan → load .env dan config.py
+
+Inisialisasi logger (output ke logs/bot.log)
+
+Inisialisasi GUI (PySide6)
+
+Connect ke MetaTrader 5 via mt5_connector.py
+
+Pilih Strategi & Parameter
+
+GUI menampilkan daftar strategi (strategies/)
+
+User pilih strategi, TP, SL, Lot Size, Symbol, Timeframe
+
+Param disimpan ke memory & file konfigurasi sementara
+
+Trading Loop
+
+data_fetcher.py ambil data terbaru
+
+Strategi dipanggil (misal scalping.py.run()), mengembalikan sinyal buy/sell/hold
+
+Jika sinyal ada → order_manager.py eksekusi order ke MT5
+
+Semua aksi dicatat ke log dan GUI di-update real-time
+
+Monitoring & Logging
+
+GUI update profit/loss, open positions, market condition
+
+Semua aksi dicatat ke logs/bot.log
+
+Error otomatis ditangani & tampil di GUI
+
+Stop Bot
+
+User klik "Stop"
+
+Semua thread di-close aman
+
+Koneksi MT5 di-disconnect
+
